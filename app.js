@@ -6,32 +6,21 @@ const db = require("./config/mongoConnection")
 
 const app = express();
 
-// Use cookie parser
 app.use(cookieParser());
 
-// Configure CORS with additional settings
-const corsOptions = {
-    origin: 'https://career-path-front-end-new.vercel.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
-    credentials : true
-};
+app.use((req, res, next) => {
+    const origin = req.headers.origin; // Get the request's origin
+    res.header('Access-Control-Allow-Origin', origin); // Dynamically set the origin
+    res.header('Access-Control-Allow-Credentials', 'true'); // Allow credentials
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Allow necessary headers
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); // Allowed methods
+    next();
+  });
 
-app.use(cors(corsOptions));
 
-// Add a route to handle OPTIONS requests explicitly
-app.options("*", cors({
-    origin: "*",
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-}));
-
-// Middleware to parse JSON and URL-encoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Route definitions
 const loginRouter = require("./routes/LoginRouter");
 const logoutRouter = require("./routes/LogoutRouter");
 const signupRouter = require("./routes/signupRouter");
@@ -44,7 +33,5 @@ app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
 app.use("/loggedin", loggedIn);
 
-// Start server
 app.listen(4000, () => {
-    // console.log("Server running on port 4000");
 });

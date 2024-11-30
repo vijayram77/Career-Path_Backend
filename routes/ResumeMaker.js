@@ -67,7 +67,7 @@ router.post("/", isLoggedin, async function (req, res) {
     if (dummydata) {
         const errors = await AIGen(dummydata);
         if (errors.length > 0) {
-            console.log("Error aa gaya");
+            // console.log("Error aa gaya");
             
             return res.status(400).json({ errors });
         }

@@ -9,7 +9,7 @@ router.post("/", async function (req, res) {
     try {
         const { email, password } = req.body;
         const user = await userModel.findOne({ email });
-        // console.log(user);
+        // // // console.log(user);
         
 
         if (!user) {
@@ -28,7 +28,7 @@ router.post("/", async function (req, res) {
                     sameSite: 'None',   
                     secure: true        
                 });
-                // console.log(user.name);
+                // // // console.log(user.name);
                 
                 return res.status(200).json({message : "Logged In Successfully" , username : user.name});
             } else {
