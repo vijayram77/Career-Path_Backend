@@ -33,5 +33,4 @@ app.use("/login", loginRouter);
 app.use("/signup", signupRouter);
 app.use("/loggedin", loggedIn);
 
-app.listen(4000, () => {
-});
+app.listen(4000);
