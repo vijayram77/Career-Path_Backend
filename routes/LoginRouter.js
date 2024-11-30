@@ -21,19 +21,13 @@ router.post("/", async function (req, res) {
                 return res.status(500).send("Error in password comparison");
             }
             if (result) {
-                const cookie = jwt.sign({email}, "Secret");
-                console.log(cookie);
+                const localStorageCookie = jwt.sign({email}, "Secret");
+                // console.log(localStorageCookie);
                 
-                res.cookie("token", cookie, {
-                    httpOnly: true,     
-                    maxAge: 24 * 60 * 60 * 1000,    
-                    sameSite: 'strict',   
-                    secure: true ,
-                    path : '/'       
-                });
+                // res.status(200).json(localStorageCookie)
                 // // // console.log(user.name);
                 
-                return res.status(200).json({message : "Logged In Successfully" , username : user.name});
+                return res.status(200).json({message : "Logged In Successfully" , localCookie : localStorageCookie , name : user.name , email : user.email});
             } else {
                 return res.status(400).send("Invalid email or password");
             }

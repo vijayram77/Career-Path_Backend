@@ -3,9 +3,9 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 
-router.get("/" , async function Loggedin(req, res) {
-  var userToken = req.cookies.token;
-  // console.log(userToken);
+router.post("/" , async function Loggedin(req, res) {
+  var userToken = req.body.token; 
+  console.log(userToken);
 
 
   if(!userToken){
