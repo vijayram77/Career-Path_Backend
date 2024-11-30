@@ -22,11 +22,14 @@ router.post("/", async function (req, res) {
             }
             if (result) {
                 const cookie = jwt.sign({email}, "Secret");
+                console.log(cookie);
+                
                 res.cookie("token", cookie, {
                     httpOnly: true,     
                     maxAge: 24 * 60 * 60 * 1000,    
-                    sameSite: 'None',   
-                    secure: true        
+                    sameSite: 'strict',   
+                    secure: true ,
+                    path : '/'       
                 });
                 // // // console.log(user.name);
                 
