@@ -6,7 +6,9 @@ const userModel = require("../models/userModel");
 async function isLoggedin(req, res, next) {
   
   try {
-    const userToken = req.cookies.token;
+    const userToken = req.body.token;
+    console.log("token is" + token);
+    
     if(!userToken){
       return res.status(401).send("Invalid User")
     }
