@@ -7,11 +7,11 @@ const isLoggedin = require('../middlewares/IsLoggedIn');
 const debug = require("debug")("development:mongoose")
 
 
-router.get("/", isLoggedin, function (req, res) {
+router.get("/", function (req, res) {
     res.send("Valid User")
 })
 
-router.post("/", isLoggedin, async function (req, res) {
+router.post("/", async function (req, res) {
 
 
     const dummydata = req.body;

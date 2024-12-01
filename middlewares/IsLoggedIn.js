@@ -4,9 +4,12 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 
 async function isLoggedin(req, res, next) {
+  var userToken = req.body.token; 
+  if(!token){
+    return res.json({message : "no token received in the backend in middleware" })
+  }
   
   try {
-    const userToken = req.body.token;
     console.log("token is" + token);
     
     if(!userToken){
